@@ -1,0 +1,5 @@
+# 로컬 설정 (실제 봇 자격증명 — 커밋하지 마세요)
+scripts/project-config.sh
+
+# macOS
+.DS_Store
