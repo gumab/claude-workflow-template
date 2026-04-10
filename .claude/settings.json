@@ -1,0 +1,171 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/setup-claude-session.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/pre-commit-msg.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "if": "Bash(gh pr create *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/pre-pr-create.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "if": "Bash(scripts/bot-gh.sh pr create *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/pre-pr-create.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "if": "Bash(git push *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/pre-push-branch.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/post-commit-reminder.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "if": "Bash(gh pr create *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/post-pr-reminder.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "if": "Bash(scripts/bot-gh.sh pr create *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/post-pr-reminder.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "if": "Bash(git push *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/post-push-pr-check.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git stash pop:*)",
+      "Bash(git stash push:*)",
+      "Bash(git stash list:*)",
+      "Bash(git checkout -b *)",
+      "Bash(git checkout feat/*)",
+      "Bash(git checkout fix/*)",
+      "Bash(git checkout main)",
+      "Bash(git branch:*)",
+      "Bash(git branch -d *)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git remote:*)",
+      "Bash(git tag:*)",
+      "Bash(gh issue create *)",
+      "Bash(gh issue view *)",
+      "Bash(gh issue list *)",
+      "Bash(gh issue edit *)",
+      "Bash(gh issue comment *)",
+      "Bash(gh issue close *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr view *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh api repos/*/pulls/*/comments)",
+      "Bash(gh api repos/*/issues/*/comments)",
+      "Bash(gh search *)",
+      "Bash(gh label *)",
+      "Bash(gh project *)",
+      "Bash(gh auth *)",
+      "Bash(scripts/bot-gh.sh pr create *)",
+      "Bash(scripts/bot-gh.sh pr view *)",
+      "Bash(scripts/bot-gh.sh pr list *)",
+      "Bash(scripts/bot-gh.sh issue comment *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(wc *)",
+      "Bash(sort *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(chmod *)",
+      "Bash(jq *)",
+      "Bash(xargs *)",
+      "Bash(echo *)",
+      "Bash(env *)",
+      "Bash(bash *)",
+      "Bash(eval *)",
+      "Bash(python3*)",
+      "Read(//tmp/**)",
+      "Read(//private/tmp/**)",
+      "WebFetch",
+      "WebSearch",
+      "mcp__notion__*",
+      "mcp__chrome-devtools__*"
+    ],
+    "additionalDirectories": [
+      "/private/tmp"
+    ]
+  }
+}
