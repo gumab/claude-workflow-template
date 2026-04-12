@@ -31,6 +31,11 @@ fi
 
 BRANCH=$(git -C "$PUSH_GIT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null)
 
+# main/develop 브랜치는 허용 (초기 부트스트랩 및 릴리즈 브랜치)
+if echo "$BRANCH" | grep -qE '^(main|develop)$'; then
+  exit 0
+fi
+
 if echo "$BRANCH" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|chore)/[0-9]+-'; then
   exit 0
 fi
